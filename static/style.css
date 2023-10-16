@@ -1,0 +1,97 @@
+/* Reset some default browser styles */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Make a header */
+header {
+    background: #50b3a2;
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+/* Style the main content area */
+main {
+    margin: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+
+/* Add a footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 9fr 2fr;
+    grid-template-rows: 1fr 6fr 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+.grid-item {
+    background-color: #0181e9;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border-radius: 5px;
+  }
+  
+.logo{
+
+}
+
+.level{
+    background-color: aqua;
+}
+
+.topright{
+    background-color: aquamarine;
+}
+
+.healthbar{
+
+}
+
+.main{
+
+}
+
+.inventory{
+    background-color: aquamarine;
+}
+
+.bottomleft{
+
+}
+
+.commandline{
+    background-color: darkslategrey;
+}
+
+.bottomright{
+    background-color: darkslategrey;
+}
+
+#submit{
+    font-size: 20px;
+    width: 100%;
+    height:120%;
+    background-color: greenyellow;
+}
+
+#commandline{
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+}

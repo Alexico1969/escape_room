@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <div class="container">
+        <div class="grid-item logo">1</div>
+        <div class="grid-item level">2</div>
+        <div class="grid-item topright">
+            <p>▼ inventory ▼</p>
+        </div>
+        <div class="grid-item healthbar">4</div>
+        <div class="grid-item main">5</div>
+        <div class="grid-item inventory">
+            {% for item in inventory %}
+                <p>{{item}}</p>
+            {% endfor %}
+        </div>
+
+        <div class="grid-item bottomleft">7</div>
+        <div class="grid-item commandline">
+            <input id="commandline" type="text" name="command" placeholder="Enter command here">
+        </div>
+        <div class="grid-item bottomright">
+            <button id="submit" type="submit" class="btn">▶ Submit</button>
+        </div>
+
+    </div>
+</form>
+{% endblock %}  
+
