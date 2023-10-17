@@ -5,10 +5,13 @@ Home Page
 {% endblock %}
 
 {% block content %}
+<a href="/logout"><span id="logout_btn">logout</span></a>
 <form method="POST">
     <div class="container">
-        <div class="grid-item logo">1</div>
-        <div class="grid-item level">2</div>
+        <div class="grid-item logo">
+            
+        </div>
+        <div class="grid-item level">Level: {{level}}</div>
         <div class="grid-item topright">
             <p>▼ inventory ▼</p>
         </div>

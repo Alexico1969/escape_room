@@ -1,0 +1,18 @@
+users
+
+    id TEXT, 
+    name TEXT, 
+    email TEXT, 
+    username TEXT, 
+    password TEXT, 
+    level INTEGER, 
+    score INTEGER, 
+    inventory TEXT
+
+rooms
+
+    level INTEGER, 
+    items TEXT, 
+    info TEXT 
+
+
