@@ -15,7 +15,7 @@ Home Page
         <div class="grid-item topright">
             <p>▼ inventory ▼</p>
         </div>
-        <div class="grid-item healthbar">4</div>
+        <div class="grid-item healthbar"></div>
         <div class="grid-item main">
             <p><img id="room_img" src="static/rooms/room_0{{user_level}}.png"></p>
             <p id="room_msg"> {{msg}} </p></div>
@@ -25,7 +25,7 @@ Home Page
             {% endfor %}
         </div>
 
-        <div class="grid-item bottomleft">7</div>
+        <div class="grid-item bottomleft"></div>
         <div class="grid-item commandline">
             <input id="commandline" type="text" name="command" placeholder="Enter command here">
         </div>
@@ -34,6 +34,14 @@ Home Page
         </div>
 
     </div>
+
+    <script>
+        // Get a reference to the input field
+        var inputField = document.getElementById("commandline");
+
+        // Set the focus to the input field
+        inputField.focus();
+    </script>
 </form>
 {% endblock %}  
 
