@@ -33,8 +33,37 @@ def register_user(name, email, username, password, level, score, inventory):
     conn.close()
 
 
-# room variables: level : [furneture, inventory, type, keywords, output, info]
+class Room:
+    def __init__(self="", level=0, description="", type="", door_locked=True, furniture="", objects="", expected_words="", expected_output=""):
+        self.level = level
+        self.description = description
+        self.type = type
+        self.door_locked = door_locked
+        self.furniture = furniture
+        self.objects = objects
+        self.expected_words = expected_words
+        self.expected_output = expected_output
+
+def init_rooms():
+    room = [1,1,1]
+    #level 1
+    room[0] = Room()
+    room[1] = Room(1, 
+                   "You are in a room. There is a table and a chair. There is a door to your left.", 
+                   "inventory",
+                   True,
+                   "table,chair,door" , 
+                   {"table":"key", "door":"doorlock", "chair":""}, 
+                   "", 
+                   "")
+    return room
+    
+
+
+'''
 rooms = {
-    1: ["1", "You are in a room. There is a table and a chair. There is a door to your left.", "table,chair" , {"table":"key"}, "inventory", "key", "", ""],
-    2: ["2", "table,computer,chair", "code", "print,Hello,World", "Hello World", ""],
+    1: ["1", "You are in a room. There is a table and a chair. There is a door to your left.", "table,chair,door" , {"table":"key"}, "inventory", "key", "", ""],
+    2: ["2", "table,computer,chair", {}, "code", "print,Hello,World", "Hello World", ""],
 }
+
+'''

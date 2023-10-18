@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_session import Session
-from database import connector, check_login, register_user, get_user_data, rooms
+from database import connector, check_login, register_user, get_user_data, Room, init_rooms
 from process import process
 
 
@@ -14,52 +14,33 @@ print(db)
 
 
 level = 1
+score = 0
+inventory = []
 
-class Room:
-    def __init__(self="", description="", door_status="", furniture="", objects="", expected_words="", expected_output=""):
-        self.description = description
-        self.door_status = door_status
-        self.furniture = furniture
-        self.objects = objects
-        self.expected_words = expected_words
-        self.expected_output = expected_output
-
-room = Room()
-
-def set_up_room():
-
-    global room, level
-    room_data = rooms[level]
-    room.description = room_data[1]
-    room.door_status = "locked"
-    room.furniture = room_data[2]
-    room.objects = room_data[3]
-    room.expected_words = room_data[4]
-    room.expected_output = room_data[5]
-
-set_up_room()
-
+room = init_rooms() # Initialize the rooms: see database.py for details
         
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    global level, room, inventory, score
+
     if 'user' not in session:
             return redirect(url_for('login'))
     
     username = session['user']
     user_data = get_user_data(username)
 
-    inventory = room.objects
+
     user_level = level
-    room_data = room
+    room_data = room[level]
     print(f"Room data: {room_data}")
 
-    msg = room.description
+    msg = room[level].description
 
     
     if request.method == 'POST':
         command = request.form['command']
-        msg = process(command, inventory, room)
-            
+        msg = process(command, inventory, room[level])
+
     return render_template('home.html', msg=msg, inventory=inventory, user_level=user_level, room_data=room_data, username=username)
 
 
@@ -87,6 +68,7 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    global level, score, inventory
     msg = ""
     if request.method == 'POST':
         username = request.form['username']
@@ -97,6 +79,12 @@ def login():
         if check_login(username, password):
             session['user'] = username
             print("user logged in")
+            level = get_user_data(username)[0][4]
+            score = get_user_data(username)[0][5]
+            inventory = []
+            inventory_string = get_user_data(username)[0][6]
+            if inventory_string != "":
+                inventory = inventory_string.split(",")
             return redirect(url_for('home'))
         else:
             msg = "Invalid login"
