@@ -9,10 +9,6 @@ users
     score INTEGER, 
     inventory TEXT
 
-rooms
 
-    level INTEGER, 
-    items TEXT, 
-    info TEXT 
 
 

@@ -17,7 +17,7 @@ def check_login(username, password):
         return False
     return True
 
-def get_user(username):
+def get_user_data(username):
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     c.execute("SELECT * FROM users WHERE username = ?", (username,))
@@ -35,6 +35,6 @@ def register_user(name, email, username, password, level, score, inventory):
 
 # room variables: level : [furneture, inventory, type, keywords, output, info]
 rooms = {
-    1: ["1", "table,chair" , "key", "inventory", "key", "", ""],
+    1: ["1", "You are in a room. There is a table and a chair. There is a door to your right.", "table,chair" , "key", "inventory", "key", "", ""],
     2: ["2", "table,computer,chair", "code", "print,Hello,World", "Hello World", ""],
 }
