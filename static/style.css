@@ -34,7 +34,7 @@ footer {
 .container {
     display: grid;
     grid-template-columns: 1fr 9fr 2fr;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-rows: 0.5fr 5fr 1fr;
     gap: 10px;
     padding: 10px;
   }
@@ -137,4 +137,17 @@ footer {
     padding: 12px 5px 0px 5px;
     text-align: center;
     border: black 2px solid;
+}
+
+#room_img{
+    width: 350px;
+    height: auto;
+    border-radius: 5px;
+}
+
+#room_msg{
+    margin-top: 10px;
+    background-color: azure;
+    border-radius: 5px;
+    padding: 5px;
 }

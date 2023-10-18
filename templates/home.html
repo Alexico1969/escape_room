@@ -16,7 +16,9 @@ Home Page
             <p>▼ inventory ▼</p>
         </div>
         <div class="grid-item healthbar">4</div>
-        <div class="grid-item main">{{msg}}</div>
+        <div class="grid-item main">
+            <p><img id="room_img" src="static/rooms/room_0{{user_level}}.png"></p>
+            <p id="room_msg"> {{msg}} </p></div>
         <div class="grid-item inventory">
             {% for item in inventory %}
                 <p>{{item}}</p>
