@@ -32,6 +32,18 @@ def register_user(name, email, username, password, level, score, inventory):
     conn.commit()
     conn.close()
 
+def update_user(username, inventory, level, score):
+    inv_string = ""
+    for el in inventory:
+        inv_string += el + ","
+    inventory = inv_string[:-1]
+    print(f"*** Inventory: {inventory}")
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("UPDATE users SET level = ?, score = ?, inventory = ? WHERE username = ?", (level, score, inventory, username))
+    conn.commit()
+    conn.close()
+
 
 class Room:
     def __init__(self="", level=0, description="", type="", door_locked=True, furniture="", objects="", expected_words="", expected_output=""):
@@ -53,9 +65,17 @@ def init_rooms():
                    "inventory",
                    True,
                    "table,chair,door" , 
-                   {"table":"key", "door":"doorlock", "chair":""}, 
+                   {"table":"key", "door":"<doorlock>", "chair":""}, 
                    "", 
                    "")
+    room[2] = Room(2,
+                     "You are in a room. There is a table and a chair. There is a door to your left.", 
+                     "code",
+                     True,
+                     "table,chair,door" , 
+                     {"table":"computer", "door":"<doorlock>", "chair":""}, 
+                     "print,Hello,World", 
+                     "Hello World")
     return room
     
 

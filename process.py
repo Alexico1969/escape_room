@@ -46,12 +46,36 @@ def process(inp, inventory, room_data):
         print(f"User command: ", inp)
         print(f"Thing: ", thing)
         print(f"room_data.objects: ", room_data.objects)
-        if thing in room_data.objects.values():
-            for key, value in room_data.objects.items():
-                if value == thing:
-                    inventory.append(thing)
-                    room_data.objects[key] = ""
-                    return f"You take the {thing}"
+        if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
+            if thing[0] == "<":
+                return f"You can't take the {thing}"
+            else:
+                for key, value in room_data.objects.items():
+                    if value == thing:
+                        inventory.append(thing)
+                        room_data.objects[key] = ""
+                        return f"You take the {thing}"
+            
+        else:
+            return f"You don't see a {thing} in the room"
+        
+    elif "get" in inp:
+        thing = inp.split("get ")[1]
+        thing = thing.replace(' ', '')
+        print(f"User command: ", inp)
+        print(f"Thing: ", thing)
+        print(f"room_data.objects: ", room_data.objects)
+        if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
+            if thing[0] == "<":
+                return f"You can't take the {thing}"
+            else:
+                thing = thing.replace('<', '')
+                thing = thing.replace('>', '')
+                for key, value in room_data.objects.items():
+                    if value == thing:
+                        inventory.append(thing)
+                        room_data.objects[key] = ""
+                        return f"You take the {thing}"
            
         else:
             return f"You don't see a {thing} in the room"
@@ -73,7 +97,7 @@ def process(inp, inventory, room_data):
         return "You pull a muscle"
 
     words = inp.split(" ")
-    bad_words = ["hit","break","fuck","smash","kick"]
+    bad_words = ["hit","break","smash","kick"]
 
     for word in words:
         if word in bad_words:
