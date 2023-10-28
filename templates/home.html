@@ -18,6 +18,10 @@ Home Page
         <div class="grid-item healthbar"></div>
         <div class="grid-item main">
             <p><img id="room_img" src="static/rooms/room_0{{user_level}}.png"></p>
+            {% if rtype == "computer" %}
+                <img id="computer_img" src="static/computers/pc_{{user_level}}.png">
+            {% endif %}
+            
             <p id="room_msg"> {{msg}} </p></div>
         <div class="grid-item inventory">
             {% for item in inventory %}

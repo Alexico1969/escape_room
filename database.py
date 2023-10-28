@@ -4,7 +4,7 @@ def connector():
     conn = sqlite3.connect('database.db')
     print("Opened database successfully")
     conn.execute('CREATE TABLE IF NOT EXISTS users (name TEXT, email TEXT, username TEXT, password TEXT, level INTEGER, score INTEGER, inventory TEXT )')
-    print("Table 'users' created successfully")
+    print("Table 'users' active")
     conn.close()
     
 def check_login(username, password):
@@ -74,8 +74,8 @@ def init_rooms():
                      True,
                      "table,chair,door" , 
                      {"table":"computer", "door":"<doorlock>", "chair":""}, 
-                     "print,Hello,World", 
-                     "Hello World")
+                     "", 
+                     "2222")
     return room
     
 

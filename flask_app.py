@@ -33,6 +33,7 @@ def home():
 
     user_level = level
     room_data = room[level]
+    rtype = room_data.type
     print(f"Room data: {room_data}")
 
     msg = room[level].description
@@ -40,16 +41,17 @@ def home():
     
     if request.method == 'POST':
         command = request.form['command']
-        msg = process(command, inventory, room[level])
+        msg = process(command, inventory, room[level], room, level)
         print()
-        print("-- -- --")
         print(f"msg: {msg}")
+        print(f"room[level].type: {room[level].type}")
+        rtype = room[level].type
         if msg == "You exit the room":
             level += 1
             print("Redirecting to next level")
             return redirect(url_for('next_level'))
 
-    return render_template('home.html', msg=msg, inventory=inventory, user_level=user_level, room_data=room_data, username=username)
+    return render_template('home.html', msg=msg, inventory=inventory, user_level=user_level, room_data=room_data, username=username,rtype=rtype)
 
 
 @app.route('/next_level', methods=['GET', 'POST'])

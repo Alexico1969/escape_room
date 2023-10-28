@@ -1,16 +1,31 @@
-def process(inp, inventory, room_data):
+def process(inp, inventory, room_data, room, level):
+
+    print(f"room: {room}")
     inp = inp.lower()
     inp = inp.replace('the ', ' ')
     inp = inp.replace(' a ', ' ')
 
     if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave":
-        if room_data.type == "inventory":
-            if room_data.door_locked:
-                return "The door is locked"
-            else:
-                return "You exit the room"
+        if room_data.door_locked:
+            return "The door is locked"
         else:
-            return "You can't exit the room"
+            return "You exit the room"
+    
+    elif room[level].type ==  "computer":
+        right_answer = room[level].expected_output
+        if inp == right_answer:
+            room[level].door_locked = False
+            return "You hear a clicking sound. The door unlocks."
+        else:
+            return "That's not the right answer"
+
+    elif "computer" in inp and room_data.type == "code":
+        words = inp.split(" ")
+        if words[0] in ["open", "use", "type"]:
+            room[level].type = "computer"
+            return "You open the computer. It asks you for a code."
+        else:
+            return "What would you like to do with the computer?"
 
     elif inp == "help":
         return "Try things like: 'look around', 'look at table', 'unlock door', 'exit room'"
@@ -36,6 +51,8 @@ def process(inp, inventory, room_data):
                 if room_data.objects[thing] != "":
                     return f"You look at the {thing} and you see a {room_data.objects[thing]}"
                 else:
+                    return f"You look at the {thing} and you see nothing special"
+            elif thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
                     return f"You look at the {thing} and you see nothing special"
             else:
                 return f"You don't see a {thing} in the room"
@@ -93,8 +110,8 @@ def process(inp, inventory, room_data):
         else:
             return f"You don't see a {thing} in the room"
 
-    if "walk" in inp:
-        return "You pull a muscle"
+    if "walk" in inp or "run" in inp or "jump "in inp:
+        return "Ah.. that felt good !"
 
     words = inp.split(" ")
     bad_words = ["hit","break","smash","kick"]
