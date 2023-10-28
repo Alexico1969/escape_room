@@ -49,7 +49,10 @@ def process(inp, inventory, room_data, room, level):
             print(f"inp.split('at '): ", inp.split("at "))
             if thing in room_data.furniture:
                 if room_data.objects[thing] != "":
-                    return f"You look at the {thing} and you see a {room_data.objects[thing]}"
+                    detail = room_data.objects[thing]
+                    detail = detail.replace('<', '')
+                    detail = detail.replace('>', '')
+                    return f"You look at the {thing} and you see a {detail}"
                 else:
                     return f"You look at the {thing} and you see nothing special"
             elif thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
