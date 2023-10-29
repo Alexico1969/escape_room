@@ -117,7 +117,7 @@ def register():
             return redirect(url_for('register'))
 
         # Register the user
-        register_user(name, email, username, password, 1, 0, "")
+        register_user(name, email, username, password, 1, 100, "")
 
         return redirect(url_for('login'))
 

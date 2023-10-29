@@ -150,7 +150,7 @@ def init_rooms():
                         "9999")
     
     room[11] = Room(11,
-                        "You are in a room. There is a small cabinet. There is a door to your left.",
+                        "This is the last level for now.",
                         "last",
                         True,
                         "table,chair,door,cabinet" ,
