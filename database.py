@@ -87,11 +87,11 @@ def init_rooms():
                      "51")
     
     room[4] = Room(4,
-                        "You are in a room. There is a table and a chair. There is a door to your left.",
+                        "You are in a room. There is a table and 2 chairs. There is a door to your left.",
                         "code",
                         True,
                         "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":""},
+                        {"table":"computer", "door":"<doorlock>", "chair":"<cushen>", "cabinet":"<pencil>"},
                         "",
                         "1821")
     
@@ -99,22 +99,22 @@ def init_rooms():
                         "You are in a room. There is a table, a small cabinet, a painting and a chair. There is a door to your left.",
                         "code",
                         True,
-                        "table,chair,door,cabinet" ,
+                        "table,chair,door,cabinet,painting" ,
                         {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "painting":"<price-tag: $20>"},
                         "",
                         "8000")
     
     room[6] = Room(6,
-                        "You are in a room. There is a table and a chair. There is a door to your left.",
+                        "You are in a room. There is a table, a small cabinet and a chair. There is a door to your left.",
                         "code",
                         True,
                         "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":""},
+                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":""},
                         "",
                         "4444")
     
     room[7] = Room(7,
-                        "You are in a room. There is a table, a small cabinet, a painting and a chair. There is a door to your left.",
+                        "You are in a room. There is a table, a small cabinet and a chair. There is a door to your left.",
                         "code",
                         True,
                         "table,chair,door,cabinet" ,
@@ -123,34 +123,34 @@ def init_rooms():
                         "1.6")
     
     room[8] = Room(8,
-                        "You are in a room. There is a table and a chair. There is a door to your left.",
+                        "You are in a room. There is a table, a small cabinet, a poster and a chair. There is a door to your left.",
                         "code",
                         True,
-                        "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":""},
+                        "table,chair,door,cabinet,poster" ,
+                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "poster":"<picture of David Malan>"},
                         "",
                         "-20")
     
     room[9] = Room(9,
-                        "You are in a room. There is a table and a chair. There is a door to your left.",
+                        "You are in a room. There is a table and a small cabinet. There is a door to your left.",
                         "code",
                         True,
-                        "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":""},
+                        "table,door,cabinet" ,
+                        {"table":"computer", "door":"<doorlock>", "cabinet":""},
                         "",
                         "24")
     
     room[10] = Room(10,
-                        "You are in a room. There is a table and a chair. There is a door to your left.",
+                        "You are in a room. There is a table and a small cabinet. There is a door to your left.",
                         "code",
                         True,
-                        "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":""},
+                        "table,door,cabinet" ,
+                        {"table":"computer", "door":"<doorlock>", "cabinet":""},
                         "",
                         "9999")
     
     room[11] = Room(11,
-                        "You are in a room. There is a table and a chair. There is a door to your left.",
+                        "You are in a room. There is a small cabinet. There is a door to your left.",
                         "last",
                         True,
                         "table,chair,door,cabinet" ,

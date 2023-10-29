@@ -15,7 +15,7 @@ print(db)
 
 
 level = 1
-score = 0
+score = 100
 inventory = []
 
 room = init_rooms() # Initialize the rooms: see database.py for details
@@ -41,6 +41,7 @@ def home():
     
     if request.method == 'POST':
         command = request.form['command']
+        score -= 1
         msg = process(command, inventory, room[level], room, level)
         print()
         print(f"msg: {msg}")
@@ -48,10 +49,11 @@ def home():
         rtype = room[level].type
         if msg == "You exit the room":
             level += 1
+            score += 100
             print("Redirecting to next level")
             return redirect(url_for('next_level'))
 
-    return render_template('home.html', msg=msg, inventory=inventory, user_level=user_level, room_data=room_data, username=username,rtype=rtype)
+    return render_template('home.html', msg=msg, inventory=inventory, user_level=user_level, room_data=room_data, username=username,rtype=rtype, score=score, user_data=user_data)
 
 
 @app.route('/next_level', methods=['GET', 'POST'])
