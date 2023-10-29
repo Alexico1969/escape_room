@@ -5,7 +5,7 @@ def process(inp, inventory, room_data, room, level):
     inp = inp.replace('the ', ' ')
     inp = inp.replace(' a ', ' ')
 
-    if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave":
+    if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave" or inp == "open door":
         if room_data.door_locked:
             return "The door is locked"
         else:
