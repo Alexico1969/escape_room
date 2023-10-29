@@ -159,17 +159,24 @@ def logout():
 # dump all the data in the database to the screen
 @app.route('/dump1', methods=['GET', 'POST'])
 def dump1():
+    if 'user' not in session:
+            return redirect(url_for('login'))
+
+    if session['user'] != 'admin':
+        return redirect(url_for('home'))
+
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     c.execute("SELECT * FROM users")
     data = c.fetchall()
     conn.close()
-    return jsonify(data)
 
-# dump all the session data, and global variables to the screen
-@app.route('/dump2', methods=['GET', 'POST'])
-def dump2():
-    return jsonify(session, level, score, inventory, room)
+    lines = []
+
+    for row in data:
+        lines.append(row)
+
+    return render_template('dump.html', lines=lines)
 
 
 

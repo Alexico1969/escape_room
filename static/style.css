@@ -95,6 +95,14 @@ footer {
     padding: 10px;
 }
 
+.dump{
+    color: white;
+    font-size: 20px;
+    margin: 5px 20px 5px 100px;
+    padding: 5px;
+    text-align: left;
+}
+
 /*  ID's  */
 
 #submit{
@@ -175,3 +183,4 @@ footer {
     font-size: 14px;
     color: yellow;
 }
+

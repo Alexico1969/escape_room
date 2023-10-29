@@ -45,8 +45,6 @@ def process(inp, inventory, room_data, room, level):
         if "at" in inp:
             thing = inp.split("at ")[1]
             thing = thing.replace(' ', '')
-            print("***")
-            print(f"inp.split('at '): ", inp.split("at "))
             if thing in room_data.furniture:
                 if room_data.objects[thing] != "":
                     detail = room_data.objects[thing]
@@ -63,9 +61,9 @@ def process(inp, inventory, room_data, room, level):
     elif "take" in inp:
         thing = inp.split("take ")[1]
         thing = thing.replace(' ', '')
-        print(f"User command: ", inp)
-        print(f"Thing: ", thing)
-        print(f"room_data.objects: ", room_data.objects)
+        #print("User command: ", inp)
+        #print("Thing: ", thing)
+        #print("room_data.objects: ", room_data.objects)
         if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
             if thing[0] == "<":
                 return f"You can't take the {thing}"
@@ -82,9 +80,9 @@ def process(inp, inventory, room_data, room, level):
     elif "get" in inp:
         thing = inp.split("get ")[1]
         thing = thing.replace(' ', '')
-        print(f"User command: ", inp)
-        print(f"Thing: ", thing)
-        print(f"room_data.objects: ", room_data.objects)
+        #print("User command: ", inp)
+        #print("Thing: ", thing)
+        #print("room_data.objects: ", room_data.objects)
         if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
             if thing[0] == "<":
                 return f"You can't take the {thing}"
