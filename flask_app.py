@@ -114,7 +114,7 @@ def register():
 
         if check_login(username, password):
             msg = 'Username already exists'
-            return redirect(url_for('register'))
+            return render_template('register.html', msg=msg)
 
         # Register the user
         register_user(name, email, username, password, 1, 100, "")
