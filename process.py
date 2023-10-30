@@ -1,9 +1,19 @@
 def process(inp, inventory, room_data, room, level):
 
-    print(f"room: {room}")
+    
     inp = inp.lower()
     inp = inp.replace('the ', ' ')
     inp = inp.replace(' a ', ' ')
+
+    print("===============")
+    print()
+    print(f"level: {level}")
+    dl1 = room_data.door_locked
+    print(f"door_locked: {dl1}")
+    print()
+    print(f"room: {room}")
+    print()
+    print("===============")
 
     if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave" or inp == "open door":
         if room_data.door_locked:
@@ -99,17 +109,20 @@ def process(inp, inventory, room_data, room, level):
             return f"You don't see a {thing} in the room"
     
     elif "unlock" in inp:
-        thing = inp.split("unlock ")[1]
-        thing = thing.replace(' ', '')
-        if thing == "door":
-            if "key" in inventory:
-                room_data.door_locked = False
-                return f"You unlock the door"
+        if room_data.type == "inventory":
+            thing = inp.split("unlock ")[1]
+            thing = thing.replace(' ', '')
+            if thing == "door":
+                if "key" in inventory:
+                    room_data.door_locked = False
+                    return f"You unlock the door"
+                else:
+                    return f"You don't have a key"
+                
             else:
-                return f"You don't have a key"
-            
+                return f"You don't see a {thing} in the room"
         else:
-            return f"You don't see a {thing} in the room"
+            return "It's not that kind of lock"
 
     if "walk" in inp or "run" in inp or "jump "in inp:
         return "Ah.. that felt good !"
