@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_session import Session
-from database import connector, check_login, register_user, get_user_data, Room, init_rooms
+from database import connector, check_login, register_user, get_user_data, Room, init_rooms, update_user
 from process import process
+import sqlite3
 
 
 app = Flask(__name__)
@@ -14,7 +15,7 @@ print(db)
 
 
 level = 1
-score = 0
+score = 100
 inventory = []
 
 room = init_rooms() # Initialize the rooms: see database.py for details
@@ -32,6 +33,7 @@ def home():
 
     user_level = level
     room_data = room[level]
+    rtype = room_data.type
     print(f"Room data: {room_data}")
 
     msg = room[level].description
@@ -39,10 +41,65 @@ def home():
     
     if request.method == 'POST':
         command = request.form['command']
-        msg = process(command, inventory, room[level])
+        score -= 1
+        msg = process(command, inventory, room[level], room, level)
+        print()
+        print(f"msg: {msg}")
+        print(f"room[level].type: {room[level].type}")
+        rtype = room[level].type
+        if msg == "You exit the room":
+            level += 1
+            score += 100
+            print("Redirecting to next level")
+            return redirect(url_for('next_level'))
 
-    return render_template('home.html', msg=msg, inventory=inventory, user_level=user_level, room_data=room_data, username=username)
+    return render_template('home.html', msg=msg, inventory=inventory, user_level=user_level, room_data=room_data, username=username,rtype=rtype, score=score, user_data=user_data)
 
+
+@app.route('/next_level', methods=['GET', 'POST'])
+def next_level():
+
+    print("*** Entering NEXT LEVEL route ***")
+
+    global level, room, inventory, score
+    if 'user' not in session:
+            return redirect(url_for('login'))
+    
+    username = session['user']
+    user_data = get_user_data(username)
+
+    user_level = level
+
+    update_user(username, inventory, level, score)
+
+    if request.method == 'POST':
+        print('Redirecting to home')
+        return redirect(url_for('home'))
+
+    return render_template('next_level.html', user_level=user_level, username=username)
+
+@app.route('/prev_level', methods=['GET', 'POST'])
+def prev_level():
+
+    print("*** Entering PREVIOUS LEVEL route ***")
+
+    global level, room, inventory, score
+    if 'user' not in session:
+            return redirect(url_for('login'))
+    
+    username = session['user']
+    user_data = get_user_data(username)
+
+    level = level - 1
+    user_level = level
+
+    update_user(username, inventory, level, score)
+
+    if request.method == 'POST':
+        print('Redirecting to home')
+        return redirect(url_for('home'))
+
+    return render_template('prev_level.html', user_level=user_level, username=username)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -57,10 +114,10 @@ def register():
 
         if check_login(username, password):
             msg = 'Username already exists'
-            return redirect(url_for('register'))
+            return render_template('register.html', msg=msg)
 
         # Register the user
-        register_user(name, email, username, password, 1, 0, "")
+        register_user(name, email, username, password, 1, 100, "")
 
         return redirect(url_for('login'))
 
@@ -98,6 +155,29 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('home'))
+
+# dump all the data in the database to the screen
+@app.route('/dump1', methods=['GET', 'POST'])
+def dump1():
+    if 'user' not in session:
+            return redirect(url_for('login'))
+
+    if session['user'] != 'admin':
+        return redirect(url_for('home'))
+
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM users")
+    data = c.fetchall()
+    conn.close()
+
+    lines = []
+
+    for row in data:
+        lines.append(row)
+
+    return render_template('dump.html', lines=lines)
+
 
 
 # -------------------------------------------------------------------------------------------

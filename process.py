@@ -1,16 +1,31 @@
-def process(inp, inventory, room_data):
+def process(inp, inventory, room_data, room, level):
+
+    print(f"room: {room}")
     inp = inp.lower()
     inp = inp.replace('the ', ' ')
     inp = inp.replace(' a ', ' ')
 
-    if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave":
-        if room_data.type == "inventory":
-            if room_data.door_locked:
-                return "The door is locked"
-            else:
-                return "You exit the room"
+    if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave" or inp == "open door":
+        if room_data.door_locked:
+            return "The door is locked"
         else:
-            return "You can't exit the room"
+            return "You exit the room"
+    
+    elif room[level].type ==  "computer":
+        right_answer = room[level].expected_output
+        if inp == right_answer:
+            room[level].door_locked = False
+            return "You hear a clicking sound. The door unlocks."
+        else:
+            return "That's not the right answer"
+
+    elif "computer" in inp and room_data.type == "code":
+        words = inp.split(" ")
+        if words[0] in ["open", "use", "type"]:
+            room[level].type = "computer"
+            return "You open the computer. It asks you for a code."
+        else:
+            return "What would you like to do with the computer?"
 
     elif inp == "help":
         return "Try things like: 'look around', 'look at table', 'unlock door', 'exit room'"
@@ -30,12 +45,15 @@ def process(inp, inventory, room_data):
         if "at" in inp:
             thing = inp.split("at ")[1]
             thing = thing.replace(' ', '')
-            print("***")
-            print(f"inp.split('at '): ", inp.split("at "))
             if thing in room_data.furniture:
                 if room_data.objects[thing] != "":
-                    return f"You look at the {thing} and you see a {room_data.objects[thing]}"
+                    detail = room_data.objects[thing]
+                    detail = detail.replace('<', '')
+                    detail = detail.replace('>', '')
+                    return f"You look at the {thing} and you see a {detail}"
                 else:
+                    return f"You look at the {thing} and you see nothing special"
+            elif thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
                     return f"You look at the {thing} and you see nothing special"
             else:
                 return f"You don't see a {thing} in the room"
@@ -43,15 +61,39 @@ def process(inp, inventory, room_data):
     elif "take" in inp:
         thing = inp.split("take ")[1]
         thing = thing.replace(' ', '')
-        print(f"User command: ", inp)
-        print(f"Thing: ", thing)
-        print(f"room_data.objects: ", room_data.objects)
-        if thing in room_data.objects.values():
-            for key, value in room_data.objects.items():
-                if value == thing:
-                    inventory.append(thing)
-                    room_data.objects[key] = ""
-                    return f"You take the {thing}"
+        #print("User command: ", inp)
+        #print("Thing: ", thing)
+        #print("room_data.objects: ", room_data.objects)
+        if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
+            if thing[0] == "<":
+                return f"You can't take the {thing}"
+            else:
+                for key, value in room_data.objects.items():
+                    if value == thing:
+                        inventory.append(thing)
+                        room_data.objects[key] = ""
+                        return f"You take the {thing}"
+            
+        else:
+            return f"You don't see a {thing} in the room"
+        
+    elif "get" in inp:
+        thing = inp.split("get ")[1]
+        thing = thing.replace(' ', '')
+        #print("User command: ", inp)
+        #print("Thing: ", thing)
+        #print("room_data.objects: ", room_data.objects)
+        if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
+            if thing[0] == "<":
+                return f"You can't take the {thing}"
+            else:
+                thing = thing.replace('<', '')
+                thing = thing.replace('>', '')
+                for key, value in room_data.objects.items():
+                    if value == thing:
+                        inventory.append(thing)
+                        room_data.objects[key] = ""
+                        return f"You take the {thing}"
            
         else:
             return f"You don't see a {thing} in the room"
@@ -69,11 +111,11 @@ def process(inp, inventory, room_data):
         else:
             return f"You don't see a {thing} in the room"
 
-    if "walk" in inp:
-        return "You pull a muscle"
+    if "walk" in inp or "run" in inp or "jump "in inp:
+        return "Ah.. that felt good !"
 
     words = inp.split(" ")
-    bad_words = ["hit","break","fuck","smash","kick"]
+    bad_words = ["hit","break","smash","kick"]
 
     for word in words:
         if word in bad_words:

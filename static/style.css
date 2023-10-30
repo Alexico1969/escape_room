@@ -95,6 +95,14 @@ footer {
     padding: 10px;
 }
 
+.dump{
+    color: white;
+    font-size: 20px;
+    margin: 5px 20px 5px 100px;
+    padding: 5px;
+    text-align: left;
+}
+
 /*  ID's  */
 
 #submit{
@@ -152,3 +160,27 @@ footer {
     padding: 5px;
     height: 60px;
 }
+
+#computer_img{
+    
+    height: 350px;
+    width: auto;
+    border-radius: 5px;
+    display:block;
+    position: absolute;
+    top: 200px;
+    right: 54%;
+    transform: translateX(50%);
+
+}
+
+#score{
+    font-size: 18px;
+    color: white
+}
+
+#scr{
+    font-size: 14px;
+    color: yellow;
+}
+
