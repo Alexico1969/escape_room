@@ -1,4 +1,5 @@
 import sqlite3
+from flask import session
 
 def connector():
     conn = sqlite3.connect('database.db')
@@ -44,6 +45,22 @@ def update_user(username, inventory, level, score):
     conn.commit()
     conn.close()
 
+def get():
+    #get values from Session
+    username = session['user']
+    score = session['score']
+    level = session['level']
+    inventory = session['inventory']
+
+    return username, score, level, inventory
+
+def store(username, score, level, inventory):
+    #store in Session
+    session['user'] = username
+    session['score'] = score
+    session['level'] = level
+    session['inventory'] = inventory
+    
 
 class Room:
     def __init__(self="", level=0, description="", type="", door_locked=True, furniture="", objects="", expected_words="", expected_output=""):
@@ -57,10 +74,10 @@ class Room:
         self.expected_output = expected_output
 
 def init_rooms():
-    room = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    rooms = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     #level 1
-    room[0] = Room()
-    room[1] = Room(1, 
+    rooms[0] = Room()
+    rooms[1] = Room(1, 
                    "You are in a room. There is a table, a small cabinet and a chair. There is a door to your left.", 
                    "inventory",
                    True,
@@ -68,7 +85,7 @@ def init_rooms():
                    {"table":"key", "door":"<doorlock>", "chair":"", "cabinet":"<spider>"}, 
                    "", 
                    "")
-    room[2] = Room(2,
+    rooms[2] = Room(2,
                      "You are in a room. There is a table, a cabinet and 2 chairs. There is a door to your left.", 
                      "code",
                      True,
@@ -77,7 +94,7 @@ def init_rooms():
                      "", 
                      "2222")
     
-    room[3] = Room(3,
+    rooms[3] = Room(3,
                      "You are in a room. There is a table, a small cabinet, a plant and a chair. There is a door to your left.", 
                      "code",
                      True,
@@ -86,7 +103,7 @@ def init_rooms():
                      "", 
                      "51")
     
-    room[4] = Room(4,
+    rooms[4] = Room(4,
                         "You are in a room. There is a table and 2 chairs. There is a door to your left.",
                         "code",
                         True,
@@ -95,7 +112,7 @@ def init_rooms():
                         "",
                         "1821")
     
-    room[5] = Room(5,
+    rooms[5] = Room(5,
                         "You are in a room. There is a table, a small cabinet, a painting and a chair. There is a door to your left.",
                         "code",
                         True,
@@ -104,7 +121,7 @@ def init_rooms():
                         "",
                         "8000")
     
-    room[6] = Room(6,
+    rooms[6] = Room(6,
                         "You are in a room. There is a table, a small cabinet and a chair. There is a door to your left.",
                         "code",
                         True,
@@ -113,7 +130,7 @@ def init_rooms():
                         "",
                         "4444")
     
-    room[7] = Room(7,
+    rooms[7] = Room(7,
                         "You are in a room. There is a table, a small cabinet and a chair. There is a door to your left.",
                         "code",
                         True,
@@ -122,7 +139,7 @@ def init_rooms():
                         "",
                         "1.6")
     
-    room[8] = Room(8,
+    rooms[8] = Room(8,
                         "You are in a room. There is a table, a small cabinet, a poster and a chair. There is a door to your left.",
                         "code",
                         True,
@@ -131,7 +148,7 @@ def init_rooms():
                         "",
                         "-20")
     
-    room[9] = Room(9,
+    rooms[9] = Room(9,
                         "You are in a room. There is a table and a small cabinet. There is a door to your left.",
                         "code",
                         True,
@@ -140,7 +157,7 @@ def init_rooms():
                         "",
                         "24")
     
-    room[10] = Room(10,
+    rooms[10] = Room(10,
                         "You are in a room. There is a table and a small cabinet. There is a door to your left.",
                         "code",
                         True,
@@ -149,7 +166,7 @@ def init_rooms():
                         "",
                         "9999")
     
-    room[11] = Room(11,
+    rooms[11] = Room(11,
                         "Do you like binge-watching? I'm at season2, episode 4.",
                         "code",
                         True,
@@ -158,7 +175,7 @@ def init_rooms():
                         "",
                         "yyy")
     
-    room[12] = Room(12,
+    rooms[12] = Room(12,
                         "Life is beautiful",
                         "code",
                         True,
@@ -168,7 +185,7 @@ def init_rooms():
                         "silence")
     
 
-    room[13] = Room(13,
+    rooms[13] = Room(13,
                         "This is the end. My only friend, the end.",
                         "code",
                         True,
@@ -180,7 +197,7 @@ def init_rooms():
     
     '''
 
-    room[11] = Room(11,
+    rooms[11] = Room(11,
                         "This is the last level for now.",
                         "last",
                         True,
@@ -197,7 +214,7 @@ def init_rooms():
 
 
 
-    return room
+    return rooms
     
 
 

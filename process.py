@@ -1,19 +1,12 @@
+from database import get, store
+
 def process(inp, inventory, room_data, room, level):
 
     
     inp = inp.lower()
     inp = inp.replace('the ', ' ')
     inp = inp.replace(' a ', ' ')
-
-    print("===============")
-    print()
-    print(f"level: {level}")
-    dl1 = room_data.door_locked
-    print(f"door_locked: {dl1}")
-    print()
-    print(f"room: {room}")
-    print()
-    print("===============")
+    inp = inp.replace(' an ', ' ')
 
     if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave" or inp == "open door":
         if room_data.door_locked:
@@ -71,17 +64,16 @@ def process(inp, inventory, room_data, room, level):
     elif "take" in inp:
         thing = inp.split("take ")[1]
         thing = thing.replace(' ', '')
-        #print("User command: ", inp)
-        #print("Thing: ", thing)
-        #print("room_data.objects: ", room_data.objects)
         if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
             if thing[0] == "<":
                 return f"You can't take the {thing}"
             else:
                 for key, value in room_data.objects.items():
                     if value == thing:
+                        username, score, level, inventory = get()
                         inventory.append(thing)
                         room_data.objects[key] = ""
+                        store(username, score, level, inventory)
                         return f"You take the {thing}"
             
         else:
