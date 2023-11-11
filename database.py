@@ -57,7 +57,7 @@ class Room:
         self.expected_output = expected_output
 
 def init_rooms():
-    room = [1,1,1,1,1,1,1,1,1,1,1,1,1]
+    room = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     #level 1
     room[0] = Room()
     room[1] = Room(1, 
@@ -150,23 +150,32 @@ def init_rooms():
                         "9999")
     
     room[11] = Room(11,
-                        "This is the last level for now.",
+                        "Do you like binge-watching? I'm at season2, episode 4.",
                         "code",
                         True,
                         "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "cabinet":""},
+                        {"table":"computer", "door":"<doorlock>", "cabinet":"","poster":"<picture of 'The OA'>"},
                         "",
                         "yyy")
     
     room[12] = Room(12,
-                        "Do you like binge-watching?",
+                        "Life is beautiful",
+                        "code",
+                        True,
+                        "table,chair,door,cabinet" ,
+                        {"table":"computer", "door":"<doorlock>", "cabinet":"","poster":"<picture of 'La Vita e Bella'>"},
+                        "",
+                        "silence")
+    
+
+    room[13] = Room(13,
+                        "This is the end. My only friend, the end.",
                         "code",
                         True,
                         "table,chair,door,cabinet" ,
                         {"table":"computer", "door":"<doorlock>", "cabinet":""},
                         "",
                         "----")
-    
 
     
     '''
