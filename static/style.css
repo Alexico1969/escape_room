@@ -103,6 +103,22 @@ footer {
     text-align: left;
 }
 
+.username{
+    /* fix to the top-left of the screen */
+    background-color: rgb(0, 221, 255);
+    color: black;
+    display:block;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    padding: 12px 5px 0px 5px;
+    text-align: center;
+    border: black 2px solid;
+    font-size: 20px;
+    width: 200px;
+    height:30px;
+}
+
 /*  ID's  */
 
 #submit{
