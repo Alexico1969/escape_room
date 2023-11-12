@@ -92,7 +92,7 @@ def init_rooms():
                      "code",
                      True,
                      "table,chair,door,cabinet" , 
-                     {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<fly>"}, 
+                     {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<fly>", "doorlock":"<sophisticated piece of technology>"}, 
                      "", 
                      "2222")
     
@@ -101,7 +101,7 @@ def init_rooms():
                      "code",
                      True,
                      "table,chair,door,cabinet,plant" , 
-                     {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "plant":"<leaf>"}, 
+                     {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "plant":"<leaf>", "doorlock":"<sophisticated piece of technology>"}, 
                      "", 
                      "51")
     
@@ -110,7 +110,7 @@ def init_rooms():
                         "code",
                         True,
                         "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":"<cushen>", "cabinet":"<pencil>"},
+                        {"table":"computer", "door":"<doorlock>", "chair":"<cushen>", "cabinet":"<pencil>", "doorlock":"<sophisticated piece of technology>"},
                         "",
                         "1821")
     
@@ -119,7 +119,7 @@ def init_rooms():
                         "code",
                         True,
                         "table,chair,door,cabinet,painting" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "painting":"<price-tag: $20>"},
+                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "painting":"<price-tag: $20>", "doorlock":"<sophisticated piece of technology>"},
                         "",
                         "8000")
     
@@ -128,7 +128,7 @@ def init_rooms():
                         "code",
                         True,
                         "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":""},
+                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"", "doorlock":"<sophisticated piece of technology>"},
                         "",
                         "4444")
     
@@ -137,7 +137,7 @@ def init_rooms():
                         "code",
                         True,
                         "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "painting":"<price-tag: $20>"},
+                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "painting":"<price-tag: $20>", "doorlock":"<sophisticated piece of technology>"},
                         "",
                         "1.6")
     
@@ -146,7 +146,7 @@ def init_rooms():
                         "code",
                         True,
                         "table,chair,door,cabinet,poster" ,
-                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "poster":"<picture of David Malan>"},
+                        {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "poster":"<picture of David Malan>", "doorlock":"<sophisticated piece of technology>"},
                         "",
                         "-20")
     
@@ -155,7 +155,7 @@ def init_rooms():
                         "code",
                         True,
                         "table,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "cabinet":""},
+                        {"table":"computer", "door":"<doorlock>", "cabinet":"", "doorlock":"<sophisticated piece of technology>"},
                         "",
                         "24")
     
@@ -164,7 +164,7 @@ def init_rooms():
                         "code",
                         True,
                         "table,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "cabinet":""},
+                        {"table":"computer", "door":"<doorlock>", "cabinet":"", "doorlock":"<sophisticated piece of technology>"},
                         "",
                         "9999")
     
