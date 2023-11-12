@@ -51,15 +51,17 @@ def get():
     score = session['score']
     level = session['level']
     inventory = session['inventory']
+    objects = session['objects']
 
-    return username, score, level, inventory
+    return username, score, level, inventory, objects
 
-def store(username, score, level, inventory):
+def store(username, score, level, inventory, objects):
     #store in Session
     session['user'] = username
     session['score'] = score
     session['level'] = level
     session['inventory'] = inventory
+    session['rooms'] = objects
     
 
 class Room:

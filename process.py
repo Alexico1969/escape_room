@@ -1,6 +1,6 @@
 from database import get, store
 
-def process(inp, inventory, room_data, room, level):
+def process(inp, inventory, room_data, rooms, level):
 
     
     inp = inp.lower()
@@ -14,10 +14,10 @@ def process(inp, inventory, room_data, room, level):
         else:
             return "You exit the room"
     
-    elif room[level].type ==  "computer":
-        right_answer = room[level].expected_output
+    elif rooms[level].type ==  "computer":
+        right_answer = rooms[level].expected_output
         if inp == right_answer:
-            room[level].door_locked = False
+            rooms[level].door_locked = False
             return "You hear a clicking sound. The door unlocks."
         else:
             return "That's not the right answer"
@@ -25,7 +25,7 @@ def process(inp, inventory, room_data, room, level):
     elif "computer" in inp and room_data.type == "code":
         words = inp.split(" ")
         if words[0] in ["open", "use", "type"]:
-            room[level].type = "computer"
+            rooms[level].type = "computer"
             return "You open the computer. It asks you for a code."
         else:
             return "What would you like to do with the computer?"
@@ -70,10 +70,11 @@ def process(inp, inventory, room_data, room, level):
             else:
                 for key, value in room_data.objects.items():
                     if value == thing:
-                        username, score, level, inventory = get()
+                        username, score, level, inventory, objects = get()
                         inventory.append(thing)
                         room_data.objects[key] = ""
-                        store(username, score, level, inventory)
+                        objects = room_data.objects
+                        store(username, score, level, inventory, objects)
                         return f"You take the {thing}"
             
         else:

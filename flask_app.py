@@ -22,7 +22,7 @@ def home():
     if 'user' not in session:
             return redirect(url_for('login'))
     
-    username, score, level, inventory = get()
+    username, score, level, inventory, objects = get()
     print("=== in home route ===")
     print()
     print(f"*** Inventory: {inventory}")
@@ -48,7 +48,7 @@ def home():
         print(f"rooms[level].type: {rooms[level].type}")
         rtype = rooms[level].type
         if msg == "You exit the room":
-            store(username, score, level, inventory)
+            store(username, score, level, inventory, objects)
             print("Redirecting to next level")
             return redirect(url_for('next_level'))
 
@@ -115,6 +115,7 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    global rooms
     msg = ""
     if request.method == 'POST':
         username = request.form['username']
@@ -135,6 +136,7 @@ def login():
             session['level'] = level
             session['score'] = score
             session['inventory'] = inventory
+            session['objects'] = rooms[level].objects
 
             return redirect(url_for('home'))
         else:
