@@ -64,6 +64,7 @@ def process(inp, inventory, room_data, rooms, level):
     elif "take" in inp:
         thing = inp.split("take ")[1]
         thing = thing.replace(' ', '')
+        print("--> Inside process.py: ", thing, f"room_data.objects.values(): {room_data.objects.values()}")
         if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
             if thing[0] == "<":
                 return f"You can't take the {thing}"

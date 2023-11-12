@@ -48,7 +48,6 @@ def home():
         print(f"rooms[level].type: {rooms[level].type}")
         rtype = rooms[level].type
         if msg == "You exit the room":
-            store(username, score, level, inventory, objects)
             print("Redirecting to next level")
             return redirect(url_for('next_level'))
 
@@ -66,6 +65,7 @@ def next_level():
     level = session['level']
     inventory = session['inventory']
     score = session['score']
+    objects = session['objects']
 
     print("=== in next_level route ===")
     print()
@@ -75,18 +75,18 @@ def next_level():
     print(f"*** Username: {username}")
     print()
     
-    level = level + 1
-    score += 100
-    user_level = level
-
-    session['level'] = level
-    session['score'] = score
-
-    update_user(username, inventory, level, score)
-
     if request.method == 'POST':
+        level = level + 1
+        score += 100
+        store(username, score, level, inventory, objects)
+        update_user(username, inventory, level, score)
         print('Redirecting to home')
         return redirect(url_for('home'))
+    
+    # we want to put the leveling up here, so it doesn't run twice !
+
+
+    user_level = level + 1
 
     return render_template('next_level.html', user_level=user_level, username=username)
 
