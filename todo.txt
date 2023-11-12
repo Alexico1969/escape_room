@@ -1,0 +1,1 @@
+whenever person 1 takes the key from the table, that key then disappears. Not just for person 1, but also for person 2.

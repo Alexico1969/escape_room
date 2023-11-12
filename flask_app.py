@@ -43,7 +43,7 @@ def home():
     if request.method == 'POST':
         command = request.form['command']
         score -= 1
-        msg = process(command, inventory, rooms[level], rooms, level)
+        msg = process(command, inventory, rooms[level], rooms, level, objects)
         print()
         print(f"msg: {msg}")
         print(f"rooms[level].type: {rooms[level].type}")

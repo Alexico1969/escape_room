@@ -1,8 +1,14 @@
-from database import get, store
+from database import get, store, update_user
+from flask import session
 
-def process(inp, inventory, room_data, rooms, level):
+def process(inp, inventory, room_data, rooms, level, objects):
 
-    
+    score = session['score']
+    score -= 1
+    session['score'] = score
+    username = session['user']
+    update_user(username, inventory, level, score)
+
     inp = inp.lower()
     inp = inp.replace('the ', ' ')
     inp = inp.replace(' a ', ' ')
@@ -73,8 +79,7 @@ def process(inp, inventory, room_data, rooms, level):
                     if value == thing:
                         username, score, level, inventory, objects = get()
                         inventory.append(thing)
-                        room_data.objects[key] = ""
-                        objects = room_data.objects
+                        objects[key] = ""
                         store(username, score, level, inventory, objects)
                         return f"You take the {thing}"
             
