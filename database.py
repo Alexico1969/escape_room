@@ -61,7 +61,7 @@ def store(username, score, level, inventory, objects):
     session['score'] = score
     session['level'] = level
     session['inventory'] = inventory
-    session['rooms'] = objects
+    session['objects'] = objects
     
 
 class Room:

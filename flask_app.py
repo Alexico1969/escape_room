@@ -23,6 +23,7 @@ def home():
             return redirect(url_for('login'))
     
     username, score, level, inventory, objects = get()
+   
     print("=== in home route ===")
     print()
     print(f"*** Inventory: {inventory}")
