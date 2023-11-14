@@ -14,6 +14,9 @@ def process(inp, inventory, room_data, rooms, level, objects):
     inp = inp.replace(' a ', ' ')
     inp = inp.replace(' an ', ' ')
 
+    if room_data.type == "end":
+        return "This is the last level for now. More levels will be added soon. Thanks for playing !"
+
     if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave" or inp == "open door":
         if room_data.door_locked:
             return "The door is locked"
@@ -72,7 +75,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
         thing = thing.replace(' ', '')
         print("--> Inside process.py: ", thing, f"room_data.objects.values(): {room_data.objects.values()}")
         if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
-            if thing[0] == "<":
+            if "<" + thing + ">" in room_data.objects.values():
                 return f"You can't take the {thing}"
             else:
                 for key, value in room_data.objects.items():
@@ -93,7 +96,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
         #print("Thing: ", thing)
         #print("room_data.objects: ", room_data.objects)
         if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
-            if thing[0] == "<":
+            if "<" + thing + ">" in room_data.objects.values():
                 return f"You can't take the {thing}"
             else:
                 thing = thing.replace('<', '')
@@ -125,6 +128,31 @@ def process(inp, inventory, room_data, rooms, level, objects):
 
     if "walk" in inp or "run" in inp or "jump "in inp:
         return "Ah.. that felt good !"
+
+    if level == 13:
+        if 'listen' in inp and 'door' in inp:
+            return "You hear a faint noise of a person breathing behind the door"
+        if 'listen' in inp:
+            return "You hear a faint noise coming from the door"
+        if 'talk' in inp:
+            if 'person' in inp:
+                return "You talk to the person behind the door. They ask you to push the key under the door"
+            else:
+                return "Are you talking to yourself?"
+        if 'push' in inp:
+            if 'key' in inp:
+                if 'key' in inventory:
+                    rooms[level].door_locked = False
+                    inventory.remove('key')
+                    update_user(username, inventory, level, score)
+                    store(username, score, level, inventory, objects)
+                    return "You push the key under the door. You hear the person behind the door pick it up. They unlock the door for you !"
+                else:
+                    return "You don't have a key"
+
+
+    if "listen" in inp:
+        return "You hear nothing special"
 
     words = inp.split(" ")
     bad_words = ["hit","break","smash","kick"]

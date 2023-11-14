@@ -76,7 +76,7 @@ class Room:
         self.expected_output = expected_output
 
 def init_rooms():
-    rooms = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    rooms = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     #level 1
     rooms[0] = Room()
     rooms[1] = Room(1, 
@@ -188,14 +188,23 @@ def init_rooms():
     
 
     rooms[13] = Room(13,
-                        "This is the end. My only friend, the end.",
-                        "code",
+                        "You are in.. yet another room... you hear a noise...",
+                        "person",
                         True,
-                        "table,chair,door,cabinet" ,
-                        {"table":"computer", "door":"<doorlock>", "cabinet":""},
+                        "door,cabinet" ,
+                        {"table":"", "door":"", "cabinet":""},
                         "",
                         "----")
 
+
+    rooms[14] = Room(14,
+                        "This is the last level for now.",
+                        "last",
+                        True,
+                        "table,chair,door,cabinet" ,
+                        {"table":"screwdriver", "door":"<blue doorlock>", "chair":"", "desk":"newspaper"},
+                        "",
+                        "----")
     
     '''
 
