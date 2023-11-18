@@ -22,7 +22,7 @@ def home():
     if 'user' not in session:
             return redirect(url_for('login'))
     
-    username, score, level, inventory, objects = get()
+    username, score, level, inventory, objects, door_status = get()
    
     print("=== in home route ===")
     print()
@@ -67,6 +67,7 @@ def next_level():
     inventory = session['inventory']
     score = session['score']
     objects = session['objects']
+    session['door_status'] = "locked"
 
     print("=== in next_level route ===")
     print()
@@ -79,6 +80,7 @@ def next_level():
     if request.method == 'POST':
         level = level + 1
         score += 100
+        objects = rooms[level].objects
         store(username, score, level, inventory, objects)
         update_user(username, inventory, level, score)
         print('Redirecting to home')
@@ -138,6 +140,7 @@ def login():
             session['score'] = score
             session['inventory'] = inventory
             session['objects'] = rooms[level].objects
+            session['door_status'] = "locked"
 
             return redirect(url_for('home'))
         else:

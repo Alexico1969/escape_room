@@ -14,11 +14,14 @@ def process(inp, inventory, room_data, rooms, level, objects):
     inp = inp.replace(' a ', ' ')
     inp = inp.replace(' an ', ' ')
 
+    door_status = session['door_status']
+
     if room_data.type == "end":
         return "This is the last level for now. More levels will be added soon. Thanks for playing !"
 
     if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave" or inp == "open door":
-        if room_data.door_locked:
+        
+        if door_status == "locked":
             return "The door is locked"
         else:
             return "You exit the room"
@@ -26,8 +29,11 @@ def process(inp, inventory, room_data, rooms, level, objects):
     elif rooms[level].type ==  "computer":
         right_answer = rooms[level].expected_output
         if inp == right_answer:
-            rooms[level].door_locked = False
+            session["door_status"] = "unlocked"
             return "You hear a clicking sound. The door unlocks."
+        elif "close" in inp or "stop" in inp:
+            rooms[level].type = "code"
+            return "You close the computer"
         else:
             return "That's not the right answer"
 
@@ -43,14 +49,16 @@ def process(inp, inventory, room_data, rooms, level, objects):
         return "Try things like: 'look around', 'look at table', 'unlock door', 'exit room'"
     
     elif inp == "look around" or inp == "look room":
+
         things = room_data.furniture.split(",")
+        print(f"--->  things: {things}")
         if len(things) == 1:
             return f"You look around and you see a {things[0]}"
         else:
-            temp = f"You look around and you see a {things[0]} "
+            temp = f"You look around and you see a {things[0]}"
             things.pop(0)
             for i in things:
-                temp += f"and a {i} "
+                temp += f", a {i}"
         return temp
     
     elif "look" in inp:
@@ -58,29 +66,31 @@ def process(inp, inventory, room_data, rooms, level, objects):
             thing = inp.split("at ")[1]
             thing = thing.replace(' ', '')
             if thing in room_data.furniture:
-                if room_data.objects[thing] != "":
-                    detail = room_data.objects[thing]
+                if objects[thing] != "":
+                    detail = objects[thing]
                     detail = detail.replace('<', '')
                     detail = detail.replace('>', '')
                     return f"You look at the {thing} and you see a {detail}"
                 else:
                     return f"You look at the {thing} and you see nothing special"
-            elif thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
+            elif thing in objects.values() or "<" + thing + ">" in objects.values():
                     return f"You look at the {thing} and you see nothing special"
             else:
                 return f"You don't see a {thing} in the room"
             
-    elif "take" in inp:
-        thing = inp.split("take ")[1]
+    elif "take" in inp or "get" in inp:
+        if "take" in inp:
+            thing = inp.split("take ")[1]
+        else:
+            thing = inp.split("get ")[1]
         thing = thing.replace(' ', '')
-        print("--> Inside process.py: ", thing, f"room_data.objects.values(): {room_data.objects.values()}")
-        if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
-            if "<" + thing + ">" in room_data.objects.values():
+        if thing in objects.values() or "<" + thing + ">" in objects.values():
+            if "<" + thing + ">" in objects.values():
                 return f"You can't take the {thing}"
             else:
-                for key, value in room_data.objects.items():
+                for key, value in objects.items():
                     if value == thing:
-                        username, score, level, inventory, objects = get()
+                        username, score, level, inventory, objects, door_status = get()
                         inventory.append(thing)
                         objects[key] = ""
                         store(username, score, level, inventory, objects)
@@ -88,35 +98,16 @@ def process(inp, inventory, room_data, rooms, level, objects):
             
         else:
             return f"You don't see a {thing} in the room"
-        
-    elif "get" in inp:
-        thing = inp.split("get ")[1]
-        thing = thing.replace(' ', '')
-        #print("User command: ", inp)
-        #print("Thing: ", thing)
-        #print("room_data.objects: ", room_data.objects)
-        if thing in room_data.objects.values() or "<" + thing + ">" in room_data.objects.values():
-            if "<" + thing + ">" in room_data.objects.values():
-                return f"You can't take the {thing}"
-            else:
-                thing = thing.replace('<', '')
-                thing = thing.replace('>', '')
-                for key, value in room_data.objects.items():
-                    if value == thing:
-                        inventory.append(thing)
-                        room_data.objects[key] = ""
-                        return f"You take the {thing}"
-           
-        else:
-            return f"You don't see a {thing} in the room"
+
     
     elif "unlock" in inp:
         if room_data.type == "inventory":
             thing = inp.split("unlock ")[1]
+            thing = thing.split(" ")[0]
             thing = thing.replace(' ', '')
             if thing == "door":
                 if "key" in inventory:
-                    room_data.door_locked = False
+                    session['door_status'] = "unlocked"
                     return f"You unlock the door"
                 else:
                     return f"You don't have a key"
@@ -129,7 +120,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
     if "walk" in inp or "run" in inp or "jump "in inp:
         return "Ah.. that felt good !"
 
-    if level == 13:
+    if level == 14:
         if 'listen' in inp and 'door' in inp:
             return "You hear a faint noise of a person breathing behind the door"
         if 'listen' in inp:
@@ -142,7 +133,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
         if 'push' in inp:
             if 'key' in inp:
                 if 'key' in inventory:
-                    rooms[level].door_locked = False
+                    session["door_status"] = "unlocked"
                     inventory.remove('key')
                     update_user(username, inventory, level, score)
                     store(username, score, level, inventory, objects)

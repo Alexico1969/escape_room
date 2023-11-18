@@ -52,8 +52,9 @@ def get():
     level = session['level']
     inventory = session['inventory']
     objects = session['objects']
+    door_status = session['door_status']
 
-    return username, score, level, inventory, objects
+    return username, score, level, inventory, objects, door_status
 
 def store(username, score, level, inventory, objects):
     #store in Session
@@ -76,7 +77,7 @@ class Room:
         self.expected_output = expected_output
 
 def init_rooms():
-    rooms = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    rooms = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     #level 1
     rooms[0] = Room()
     rooms[1] = Room(1, 
@@ -169,10 +170,10 @@ def init_rooms():
                         "9999")
     
     rooms[11] = Room(11,
-                        "Do you like binge-watching? I'm at season2, episode 4.",
+                        "Do you like binge-watching? I'm at season 2, episode 4. Check out the poster !",
                         "code",
                         True,
-                        "table,chair,door,cabinet" ,
+                        "table,chair,door,cabinet,poster" ,
                         {"table":"computer", "door":"<doorlock>", "cabinet":"","poster":"<picture of 'The OA'>"},
                         "",
                         "yyy")
@@ -181,13 +182,22 @@ def init_rooms():
                         "Life is beautiful",
                         "code",
                         True,
-                        "table,chair,door,cabinet" ,
+                        "table,chair,door,cabinet,poster" ,
                         {"table":"computer", "door":"<doorlock>", "cabinet":"","poster":"<picture of 'La Vita e Bella'>"},
                         "",
                         "silence")
     
-
     rooms[13] = Room(13,
+                        "The choice is yours.... ",
+                        "code",
+                        True,
+                        "table,chair,door,cabinet,poster" ,
+                        {"table":"computer", "door":"<doorlock>", "cabinet":"","poster":"<picture of 'the Matrix'>"},
+                        "",
+                        "red pill")
+
+
+    rooms[14] = Room(14,
                         "You are in.. yet another room... you hear a noise...",
                         "person",
                         True,
@@ -197,7 +207,7 @@ def init_rooms():
                         "----")
 
 
-    rooms[14] = Room(14,
+    rooms[15] = Room(14,
                         "This is the last level for now.",
                         "last",
                         True,

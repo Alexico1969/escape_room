@@ -1,1 +1,1 @@
-whenever person 1 takes the key from the table, that key then disappears. Not just for person 1, but also for person 2.
+whenever person 1 unlocks the door to their room in their level, will it also unlock the door for person 2 (this person was doing the same level)
