@@ -28,7 +28,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
     
     elif rooms[level].type ==  "computer":
         right_answer = rooms[level].expected_output
-        if inp == right_answer:
+        if right_answer in inp:
             session["door_status"] = "unlocked"
             return "You hear a clicking sound. The door unlocks."
         elif "close" in inp or "stop" in inp:
