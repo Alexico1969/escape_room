@@ -127,7 +127,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
             return "You hear a faint noise coming from the door"
         if 'talk' in inp:
             if 'person' in inp:
-                return "You talk to the person behind the door. They ask you to push the key under the door"
+                return "You talk to the person behind the door. They ask you to give them something. Anything."
             else:
                 return "Are you talking to yourself?"
         if 'push' in inp:
