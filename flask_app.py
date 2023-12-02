@@ -23,7 +23,12 @@ def home():
             return redirect(url_for('login'))
     
     username, score, level, inventory, objects, door_status = get()
-   
+
+    if score == 100:
+        session['new'] = True
+    else:
+        session['new'] = False
+
     print("=== in home route ===")
     print()
     print(f"*** Inventory: {inventory}")
@@ -43,6 +48,10 @@ def home():
     if request.method == 'POST':
         command = request.form['command']
         score -= 1
+        if score == 100:
+            session['new'] = True
+        else:
+            session['new'] = False
         msg = process(command, inventory, rooms[level], rooms, level, objects)
         print()
         print(f"msg: {msg}")
@@ -141,6 +150,8 @@ def login():
             session['inventory'] = inventory
             session['objects'] = rooms[level].objects
             session['door_status'] = "locked"
+            session['new'] = True
+            print(f"session['new']: {session['new']}")
 
             return redirect(url_for('home'))
         else:

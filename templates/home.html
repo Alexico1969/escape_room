@@ -7,6 +7,14 @@ Home Page
 {% block content %}
 <p class="username">{{username}}</p>
 <a href="/logout"><span id="logout_btn">logout</span></a>
+{% if session.get('new', False) %}
+<div class="vid">
+    <video id="myVideo">
+        <source src="static/EscapeR-intro-v3.mp4" type="video/mp4">
+    </video>
+    <button id="vid-but" onclick="document.getElementById('myVideo').play(); this.style.display='none';">CLICK to START</button>
+</div>
+{% endif %}
 <form method="POST">
     <div class="container">
         <div class="grid-item topleft">
@@ -23,6 +31,7 @@ Home Page
             {% if rtype == "computer" %}
                 <img id="computer_img" src="static/computers/pc_{{user_level}}.png">
             {% endif %}
+
             
             <p id="room_msg"> {{msg}} </p></div>
         <div class="grid-item inventory">
@@ -36,18 +45,44 @@ Home Page
             <input id="commandline" type="text" name="command" placeholder="Enter command here">
         </div>
         <div class="grid-item bottomright">
+            {% if session.get('new', False) %}
+            <button id="submit" type="submit" class="btn" style="visibility: hidden;";>▶ Submit</button>
+            {% else %}
             <button id="submit" type="submit" class="btn">▶ Submit</button>
+            {% endif %}
+
         </div>
 
     </div>
+</form>
 
     <script>
-        // Get a reference to the input field
-        var inputField = document.getElementById("commandline");
+        console.log("Check 1");
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Check 2");
 
-        // Set the focus to the input field
-        inputField.focus();
+            // Get a reference to the input field and of the video element
+            var inputField = document.getElementById("commandline");
+            var myVideo = document.getElementById('myVideo');
+
+
+            // Set the focus to the input field
+            inputField.focus();
+
+            // Check for a video element with id "myVideo", and if found, add an event listener for the "ended" event
+            if (myVideo) {
+                myVideo.addEventListener('ended', function() {
+                    this.style.display = 'none';
+                    console.log("video ended");
+                    //make the submit button visible
+                    document.getElementById("submit").style.visibility = "visible";
+                });
+            } else {
+                console.error('Video element with id "myVideo" not found.');
+            }
+            console.log("Check 3");
+        });
     </script>
-</form>
+
 {% endblock %}  
 
