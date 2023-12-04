@@ -95,7 +95,7 @@ def init_rooms():
                      "table,chair,door,cabinet" , 
                      {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<fly>", "doorlock":"<sophisticated piece of technology>"}, 
                      "", 
-                     "2222")
+                     "321321")
     
     rooms[3] = Room(3,
                      "You are in a room. There is a table, a small cabinet, a plant and a chair. There is a door to your left.", 
@@ -104,7 +104,7 @@ def init_rooms():
                      "table,chair,door,cabinet,plant" , 
                      {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "plant":"<leaf>", "doorlock":"<sophisticated piece of technology>"}, 
                      "", 
-                     "51")
+                     "1051")
     
     rooms[4] = Room(4,
                         "You are in a room. There is a table and 2 chairs. There is a door to your left.",
@@ -122,7 +122,7 @@ def init_rooms():
                         "table,chair,door,cabinet,painting" ,
                         {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "painting":"<price-tag: $20>", "doorlock":"<sophisticated piece of technology>"},
                         "",
-                        "8000")
+                        "8888")
     
     rooms[6] = Room(6,
                         "You are in a room. There is a table, a small cabinet and a chair. There is a door to your left.",
@@ -131,7 +131,7 @@ def init_rooms():
                         "table,chair,door,cabinet" ,
                         {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"", "doorlock":"<sophisticated piece of technology>"},
                         "",
-                        "4444")
+                        "1324")
     
     rooms[7] = Room(7,
                         "You are in a room. There is a table, a small cabinet and a chair. There is a door to your left.",
@@ -140,7 +140,7 @@ def init_rooms():
                         "table,chair,door,cabinet" ,
                         {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "painting":"<price-tag: $20>", "doorlock":"<sophisticated piece of technology>"},
                         "",
-                        "1.6")
+                        "379379")
     
     rooms[8] = Room(8,
                         "You are in a room. There is a table, a small cabinet, a poster and a chair. There is a door to your left.",
@@ -149,7 +149,7 @@ def init_rooms():
                         "table,chair,door,cabinet,poster" ,
                         {"table":"computer", "door":"<doorlock>", "chair":"", "cabinet":"<spider>", "poster":"<picture of David Malan>", "doorlock":"<sophisticated piece of technology>"},
                         "",
-                        "-20")
+                        "1331")
     
     rooms[9] = Room(9,
                         "You are in a room. There is a table and a small cabinet. There is a door to your left.",
@@ -158,7 +158,7 @@ def init_rooms():
                         "table,door,cabinet" ,
                         {"table":"computer", "door":"<doorlock>", "cabinet":"", "doorlock":"<sophisticated piece of technology>"},
                         "",
-                        "24")
+                        "2748")
     
     rooms[10] = Room(10,
                         "You are in a room. There is a table and a small cabinet. There is a door to your left.",
