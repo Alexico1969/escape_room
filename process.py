@@ -10,7 +10,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
     update_user(username, inventory, level, score)
 
     inp = inp.lower()
-    inp = inp.replace('the ', ' ')
+    inp = inp.replace(' the ', ' ')
     inp = inp.replace(' a ', ' ')
     inp = inp.replace(' an ', ' ')
 
@@ -21,7 +21,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
         if room_data.type == "end":
             return "This is the last level for now. More levels will be added soon. Thanks for playing !"
 
-        if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave" or inp == "open door":
+        if inp == "exit room" or inp == "exit" or inp == "leave room" or inp == "leave" or inp == "open door" or inp == "open door with key":
             
             if door_status == "locked":
                 return "The door is locked"
@@ -51,7 +51,7 @@ def process(inp, inventory, room_data, rooms, level, objects):
         elif inp == "help":
             return "Try things like: 'look around', 'look at table', 'unlock door', 'exit room'"
         
-        elif inp == "look around" or inp == "look room":
+        elif inp == "look around" or inp == "look room" or inp == "look":
 
             things = room_data.furniture.split(",")
             print(f"--->  things: {things}")
