@@ -80,6 +80,19 @@ def process(inp, inventory, room_data, rooms, level, objects):
                         return f"You look at the {thing} and you see nothing special"
                 else:
                     return f"You don't see a {thing} in the room"
+            else:
+                if inp == "look door":
+                    if door_status == "locked":
+                        return "The door is locked"
+                    else:
+                        return "The door is unlocked"
+                elif inp == "look key":
+                    if "key" in inventory:
+                        return "You see a key in your inventory"
+                    else:
+                        return "You don't have a key"
+                elif inp == "look computer":
+                    return "You see a computer. To use the computer type 'use computer'"
                 
         elif "take" in inp or "get" in inp:
             if "take" in inp:
